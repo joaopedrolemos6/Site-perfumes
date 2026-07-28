@@ -9,38 +9,129 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as JornalRouteImport } from './routes/jornal'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ColecaoRouteImport } from './routes/colecao'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JornalRoute = JornalRouteImport.update({
+  id: '/jornal',
+  path: '/jornal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColecaoRoute = ColecaoRouteImport.update({
+  id: '/colecao',
+  path: '/colecao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProdutoSlugRoute = ProdutoSlugRouteImport.update({
+  id: '/produto/$slug',
+  path: '/produto/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/colecao': typeof ColecaoRoute
+  '/contato': typeof ContatoRoute
+  '/jornal': typeof JornalRoute
+  '/sobre': typeof SobreRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/colecao': typeof ColecaoRoute
+  '/contato': typeof ContatoRoute
+  '/jornal': typeof JornalRoute
+  '/sobre': typeof SobreRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/colecao': typeof ColecaoRoute
+  '/contato': typeof ContatoRoute
+  '/jornal': typeof JornalRoute
+  '/sobre': typeof SobreRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/colecao'
+    | '/contato'
+    | '/jornal'
+    | '/sobre'
+    | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/colecao' | '/contato' | '/jornal' | '/sobre' | '/produto/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/colecao'
+    | '/contato'
+    | '/jornal'
+    | '/sobre'
+    | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ColecaoRoute: typeof ColecaoRoute
+  ContatoRoute: typeof ContatoRoute
+  JornalRoute: typeof JornalRoute
+  SobreRoute: typeof SobreRoute
+  ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jornal': {
+      id: '/jornal'
+      path: '/jornal'
+      fullPath: '/jornal'
+      preLoaderRoute: typeof JornalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colecao': {
+      id: '/colecao'
+      path: '/colecao'
+      fullPath: '/colecao'
+      preLoaderRoute: typeof ColecaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +139,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/produto/$slug': {
+      id: '/produto/$slug'
+      path: '/produto/$slug'
+      fullPath: '/produto/$slug'
+      preLoaderRoute: typeof ProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ColecaoRoute: ColecaoRoute,
+  ContatoRoute: ContatoRoute,
+  JornalRoute: JornalRoute,
+  SobreRoute: SobreRoute,
+  ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
