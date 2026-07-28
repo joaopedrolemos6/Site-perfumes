@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { ProductGrid } from "@/components/ProductGrid";
 import { useCart } from "@/context/cart";
-import { formatPrice, getProduct, products } from "@/data/products";
+import { formatPrice, getProduct, products, type Product } from "@/data/products";
 
 export const Route = createFileRoute("/produto/$slug")({
   loader: ({ params }) => {
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/produto/$slug")({
 });
 
 function ProdutoPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const [size, setSize] = useState(product.sizes[1] ?? product.sizes[0]);
   const { add } = useCart();
 
