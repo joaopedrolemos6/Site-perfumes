@@ -1,24 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/Hero";
+import { Philosophy } from "@/components/Philosophy";
+import { ProductGrid } from "@/components/ProductGrid";
+import { NotesSection } from "@/components/NotesSection";
+import { EditorialSection } from "@/components/EditorialSection";
+import { products } from "@/data/products";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Atelier Onze — Perfumaria de nicho em pequenos lotes";
+const description =
+  "Seis composições de perfumaria de nicho, feitas em pequenos lotes e engarrafadas à mão. Amadeirados, almiscarados e terrosos.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <Philosophy />
+      <ProductGrid products={products.slice(0, 3)} eyebrow="Coleção" title="Seis composições" />
+      <NotesSection />
+      <EditorialSection />
+    </>
   );
 }
