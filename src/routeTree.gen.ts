@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as JornalRouteImport } from './routes/jornal'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ColecaoRouteImport } from './routes/colecao'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,11 +18,6 @@ import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JornalRoute = JornalRouteImport.update({
-  id: '/jornal',
-  path: '/jornal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -51,7 +45,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/colecao': typeof ColecaoRoute
   '/contato': typeof ContatoRoute
-  '/jornal': typeof JornalRoute
   '/sobre': typeof SobreRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -59,7 +52,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/colecao': typeof ColecaoRoute
   '/contato': typeof ContatoRoute
-  '/jornal': typeof JornalRoute
   '/sobre': typeof SobreRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -68,36 +60,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/colecao': typeof ColecaoRoute
   '/contato': typeof ContatoRoute
-  '/jornal': typeof JornalRoute
   '/sobre': typeof SobreRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/colecao'
-    | '/contato'
-    | '/jornal'
-    | '/sobre'
-    | '/produto/$slug'
+  fullPaths: '/' | '/colecao' | '/contato' | '/sobre' | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/colecao' | '/contato' | '/jornal' | '/sobre' | '/produto/$slug'
-  id:
-    | '__root__'
-    | '/'
-    | '/colecao'
-    | '/contato'
-    | '/jornal'
-    | '/sobre'
-    | '/produto/$slug'
+  to: '/' | '/colecao' | '/contato' | '/sobre' | '/produto/$slug'
+  id: '__root__' | '/' | '/colecao' | '/contato' | '/sobre' | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ColecaoRoute: typeof ColecaoRoute
   ContatoRoute: typeof ContatoRoute
-  JornalRoute: typeof JornalRoute
   SobreRoute: typeof SobreRoute
   ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
@@ -109,13 +86,6 @@ declare module '@tanstack/react-router' {
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/jornal': {
-      id: '/jornal'
-      path: '/jornal'
-      fullPath: '/jornal'
-      preLoaderRoute: typeof JornalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -153,7 +123,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ColecaoRoute: ColecaoRoute,
   ContatoRoute: ContatoRoute,
-  JornalRoute: JornalRoute,
   SobreRoute: SobreRoute,
   ProdutoSlugRoute: ProdutoSlugRoute,
 }
