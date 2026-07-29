@@ -17,7 +17,6 @@ import { CartProvider } from "@/context/cart";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
-import { CustomCursor } from "@/components/CustomCursor";
 
 function NotFoundComponent() {
   return (
@@ -119,7 +118,6 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <CustomCursor />
         <Header />
         <AnimatePresence mode="wait" initial={false}>
           <motion.main

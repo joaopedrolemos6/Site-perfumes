@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { Philosophy } from "@/components/Philosophy";
 import { ProductGrid } from "@/components/ProductGrid";
 import { NotesSection } from "@/components/NotesSection";
-import { EditorialSection } from "@/components/EditorialSection";
 import { products } from "@/data/products";
 
 const title = "Atelier Onze — Perfumaria de nicho em pequenos lotes";
@@ -29,7 +28,6 @@ function Index() {
       <Philosophy />
       <ProductGrid products={products.slice(0, 3)} eyebrow="Coleção" title="Seis composições" />
       <NotesSection />
-      <EditorialSection />
     </>
   );
 }
