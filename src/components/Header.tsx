@@ -8,7 +8,6 @@ import { EASE } from "@/components/Reveal";
 const links = [
   { to: "/colecao", label: "Coleção" },
   { to: "/sobre", label: "Sobre" },
-  { to: "/jornal", label: "Jornal" },
   { to: "/contato", label: "Contato" },
 ] as const;
 

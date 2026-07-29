@@ -13,7 +13,6 @@ const columns = [
     title: "Casa",
     links: [
       { label: "Sobre", to: "/sobre" },
-      { label: "Jornal", to: "/jornal" },
       { label: "Contato", to: "/contato" },
     ],
   },
